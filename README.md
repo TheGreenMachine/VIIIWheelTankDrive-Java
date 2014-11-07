@@ -1,4 +1,4 @@
-8WheelTankDrive-Java
-====================
+![The Green Machine Logo](http://edinarobotics.com/sites/all/themes/greenmachine/assets/images/Logo.gif)
 
-General code for a tank drive that uses 6 sims to control 8 wheels. There will be 4 wheels each side.
+#8WheelTankDrive-Java
+This is the Java code repository for FRC Team 1816's 8WheelTankDrive.
