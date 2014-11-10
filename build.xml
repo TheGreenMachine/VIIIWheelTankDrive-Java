@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="help" name="Zeke-Java">
+<project basedir="." default="help" name="VIIIWheelTankDrive-Java">
     <!--These lines are the standard properties loads in the normal build script. -->
     <property name="user.properties.file" value="build.properties"/>
     <property file="${user.home}/.sunspotfrc.properties"/>
