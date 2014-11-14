@@ -16,10 +16,10 @@ public class Controls {
     public final Gamepad gamepad;
     
     private Controls() {        
-        Vector shootGamepadFilters = new Vector();
-        shootGamepadFilters.addElement(new DeadzoneFilter(0.1));
-        shootGamepadFilters.addElement(new PowerFilter(2));
-        GamepadFilterSet shootGamepadFilterSet = new GamepadFilterSet(shootGamepadFilters);
+        Vector gamepadFilters = new Vector();
+        gamepadFilters.addElement(new DeadzoneFilter(0.1));
+        gamepadFilters.addElement(new PowerFilter(2));
+        GamepadFilterSet shootGamepadFilterSet = new GamepadFilterSet(gamepadFilters);
         gamepad = new FilteredGamepad(3, shootGamepadFilterSet);
     }
     
