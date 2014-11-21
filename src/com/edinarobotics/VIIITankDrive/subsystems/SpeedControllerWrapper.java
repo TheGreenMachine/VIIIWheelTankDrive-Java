@@ -15,19 +15,42 @@ public class SpeedControllerWrapper implements SpeedController {
     }
 
     public double get() {
-        return canJag1.get();
+        try {
+            return canJag1.getX();
+        } catch(CANTimeoutException e) {
+            System.err.println("CAN Timeout Exception");
+            return 0.0;
+        }
     }
-
+    
     public void set(double d, byte b) {
-        
+        try {
+            canJag1.setX(d, b);
+            canJag2.setX(d, b);
+            canJag3.setX(d, b);
+        } catch (CANTimeoutException e) {
+            System.err.println("CAN Timeout Exception");
+        }
     }
 
     public void set(double d) {
-        
+        try {
+            canJag1.setX(d);
+            canJag2.setX(d);
+            canJag3.setX(d);
+        } catch (CANTimeoutException e) {
+            System.err.println("CAN Timeout Exception");
+        }
     }
 
     public void disable() {
-        
+        try {
+             canJag1.disableControl();
+             canJag2.disableControl();
+             canJag3.disableControl();
+        } catch (CANTimeoutException e) {
+            System.err.println("CAN Timeout Exception");
+        }
     }
 
     public void pidWrite(double d) {

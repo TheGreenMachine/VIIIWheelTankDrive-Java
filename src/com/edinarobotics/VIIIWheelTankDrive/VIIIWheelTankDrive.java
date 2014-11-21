@@ -10,29 +10,49 @@ package com.edinarobotics.VIIIWheelTankDrive;
 
 import com.edinarobotics.VIIITankDrive.commands.GamepadDriveCommand;
 import com.edinarobotics.VIIITankDrive.subsystems.Drivetrain;
+import com.edinarobotics.VIIITankDrive.subsystems.SpeedControllerWrapper;
+import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.can.CANTimeoutException;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
-public class VIIIWheelTankDrive extends IterativeRobot {
-    
-    private Drivetrain drivetrain;
-    
-    
+public class VIIIWheelTankDrive extends IterativeRobot {  
     
     public void robotInit() {
-        drivetrain = Components.getInstance().drivetrain;
     }
 
     public void autonomousPeriodic() {
-
+    
     }
 
     
     public void teleopPeriodic() {
-        Components.getInstance().drivetrain.setDefaultCommand(new GamepadDriveCommand());
+        Scheduler.getInstance().run();
     }
     
     public void testPeriodic() {
     
     }
     
+    public void stop() throws CANTimeoutException {
+        Components.getInstance().drivetrain.setValues(0.0, 0.0);
+    }
+    
+    public void teleopInit() {
+        try {
+            Components.getInstance().drivetrain.setDefaultCommand(new GamepadDriveCommand());
+            System.out.println("Point 3");
+        } catch (CANTimeoutException e) {
+            System.err.println("CAN Timeout Exception");
+        }
+        System.out.println("It's alive...");
+    }
+    
+    public void disabledInit() {
+        
+    }
+    
+    public void disabledPeriodic() {
+        
+    }
 }

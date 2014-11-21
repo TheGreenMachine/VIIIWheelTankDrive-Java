@@ -1,8 +1,10 @@
 package com.edinarobotics.VIIITankDrive.commands;
 
 import com.edinarobotics.VIIITankDrive.subsystems.Drivetrain;
+import com.edinarobotics.VIIIWheelTankDrive.Components;
 import com.edinarobotics.VIIIWheelTankDrive.Controls;
 import com.edinarobotics.utils.gamepad.Gamepad;
+import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class GamepadDriveCommand extends Command{
@@ -11,8 +13,15 @@ public class GamepadDriveCommand extends Command{
     private Drivetrain drivetrain;
 
     protected void initialize() {
-        gamepad = Controls.getInstance().gamepad;
-        requires(drivetrain);
+        
+        
+        try {
+            drivetrain = Components.getInstance().drivetrain;
+            requires(drivetrain);
+            gamepad = Controls.getInstance().gamepad;
+        } catch (CANTimeoutException ex) {
+            ex.printStackTrace();
+        }
     }
 
     protected void execute() {

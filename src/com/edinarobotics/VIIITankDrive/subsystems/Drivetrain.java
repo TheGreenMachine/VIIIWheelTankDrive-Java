@@ -11,16 +11,9 @@ public class Drivetrain extends Subsystem1816 {
     private SpeedControllerWrapper rightSection, leftSection;
     private double rightValue, leftValue;
 
-    public Drivetrain(int leftCANJag1, int leftCANJag2, int leftCANJag3,
-            int rightCANJag1, int rightCANJag2, int rightCANJag3) {
-        try {
-            rightSection = new SpeedControllerWrapper(rightCANJag1, rightCANJag2, rightCANJag3);
-            leftSection = new SpeedControllerWrapper(leftCANJag1, leftCANJag2, leftCANJag3);
-        } catch (CANTimeoutException ex) {
-            ex.printStackTrace();
-            System.out.println("CANJaguar assignment failed! lelelel");
-        }
-        
+    public Drivetrain(SpeedControllerWrapper r, SpeedControllerWrapper l) {
+        rightSection = r;
+        leftSection = l;
         this.robotDrive = new RobotDrive(rightSection, leftSection);
     }
     
@@ -31,6 +24,7 @@ public class Drivetrain extends Subsystem1816 {
     }
 
     public void update() {
+        System.out.println("Point 5");
         this.robotDrive.tankDrive(leftValue, rightValue);
     }
     

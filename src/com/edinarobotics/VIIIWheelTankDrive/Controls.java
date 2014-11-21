@@ -1,5 +1,6 @@
 package com.edinarobotics.VIIIWheelTankDrive;
 
+import com.edinarobotics.VIIITankDrive.commands.SetSolenoidCommand;
 import com.edinarobotics.utils.gamepad.FilteredGamepad;
 import com.edinarobotics.utils.gamepad.FilteredTwoAxisJoystick;
 import com.edinarobotics.utils.gamepad.Gamepad;
@@ -8,6 +9,8 @@ import com.edinarobotics.utils.gamepad.gamepadfilters.DeadzoneFilter;
 import com.edinarobotics.utils.gamepad.gamepadfilters.GamepadFilterSet;
 import com.edinarobotics.utils.gamepad.gamepadfilters.JoystickFilterSet;
 import com.edinarobotics.utils.gamepad.gamepadfilters.PowerFilter;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import java.util.Vector;
 
 public class Controls {
@@ -15,12 +18,15 @@ public class Controls {
     
     public final Gamepad gamepad;
     
-    private Controls() {        
+    private Controls() throws CANTimeoutException {        
         Vector gamepadFilters = new Vector();
         gamepadFilters.addElement(new DeadzoneFilter(0.1));
         gamepadFilters.addElement(new PowerFilter(2));
         GamepadFilterSet shootGamepadFilterSet = new GamepadFilterSet(gamepadFilters);
         gamepad = new FilteredGamepad(3, shootGamepadFilterSet);
+        
+        gamepad.leftBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kForward));
+        gamepad.rightBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kReverse));
     }
     
     /**
@@ -30,7 +36,7 @@ public class Controls {
      *
      * @return The current instance of Controls.
      */
-    public static Controls getInstance() {
+    public static Controls getInstance() throws CANTimeoutException {
         if (instance == null) {
             instance = new Controls();
         }
