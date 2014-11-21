@@ -2,7 +2,6 @@ package com.edinarobotics.VIIITankDrive.subsystems;
 
 import com.edinarobotics.utils.subsystems.Subsystem1816;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Drivetrain extends Subsystem1816 {

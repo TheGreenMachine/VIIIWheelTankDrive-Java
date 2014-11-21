@@ -2,12 +2,9 @@ package com.edinarobotics.VIIIWheelTankDrive;
 
 import com.edinarobotics.VIIITankDrive.commands.SetSolenoidCommand;
 import com.edinarobotics.utils.gamepad.FilteredGamepad;
-import com.edinarobotics.utils.gamepad.FilteredTwoAxisJoystick;
 import com.edinarobotics.utils.gamepad.Gamepad;
-import com.edinarobotics.utils.gamepad.TwoAxisJoystick;
 import com.edinarobotics.utils.gamepad.gamepadfilters.DeadzoneFilter;
 import com.edinarobotics.utils.gamepad.gamepadfilters.GamepadFilterSet;
-import com.edinarobotics.utils.gamepad.gamepadfilters.JoystickFilterSet;
 import com.edinarobotics.utils.gamepad.gamepadfilters.PowerFilter;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
