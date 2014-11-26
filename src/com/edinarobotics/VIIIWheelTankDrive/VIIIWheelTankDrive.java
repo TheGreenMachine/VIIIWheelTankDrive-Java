@@ -8,7 +8,7 @@
 package com.edinarobotics.VIIIWheelTankDrive;
 
 
-import com.edinarobotics.VIIITankDrive.commands.GamepadDriveCommand;
+import com.edinarobotics.VIIIWheelTankDrive.commands.GamepadDriveCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Scheduler;

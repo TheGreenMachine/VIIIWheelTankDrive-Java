@@ -1,8 +1,8 @@
 package com.edinarobotics.VIIIWheelTankDrive;
 
-import com.edinarobotics.VIIITankDrive.subsystems.Drivetrain;
-import com.edinarobotics.VIIITankDrive.subsystems.Gearshifter;
-import com.edinarobotics.VIIITankDrive.subsystems.SpeedControllerWrapper;
+import com.edinarobotics.VIIIWheelTankDrive.subsystems.Drivetrain;
+import com.edinarobotics.VIIIWheelTankDrive.subsystems.Gearshifter;
+import com.edinarobotics.VIIIWheelTankDrive.subsystems.SpeedControllerWrapper;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 

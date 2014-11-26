@@ -1,6 +1,6 @@
-package com.edinarobotics.VIIITankDrive.commands;
+package com.edinarobotics.VIIIWheelTankDrive.commands;
 
-import com.edinarobotics.VIIITankDrive.subsystems.Drivetrain;
+import com.edinarobotics.VIIIWheelTankDrive.subsystems.Drivetrain;
 import com.edinarobotics.VIIIWheelTankDrive.Components;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Command;

@@ -1,4 +1,4 @@
-package com.edinarobotics.VIIITankDrive.subsystems;
+package com.edinarobotics.VIIIWheelTankDrive.subsystems;
 
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.SpeedController;

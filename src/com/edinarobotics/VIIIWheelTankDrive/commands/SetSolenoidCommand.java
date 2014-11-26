@@ -1,6 +1,6 @@
-package com.edinarobotics.VIIITankDrive.commands;
+package com.edinarobotics.VIIIWheelTankDrive.commands;
 
-import com.edinarobotics.VIIITankDrive.subsystems.Gearshifter;
+import com.edinarobotics.VIIIWheelTankDrive.subsystems.Gearshifter;
 import com.edinarobotics.VIIIWheelTankDrive.Components;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;

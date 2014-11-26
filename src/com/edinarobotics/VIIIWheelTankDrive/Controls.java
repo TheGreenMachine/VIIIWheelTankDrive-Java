@@ -1,6 +1,6 @@
 package com.edinarobotics.VIIIWheelTankDrive;
 
-import com.edinarobotics.VIIITankDrive.commands.SetSolenoidCommand;
+import com.edinarobotics.VIIIWheelTankDrive.commands.SetSolenoidCommand;
 import com.edinarobotics.utils.gamepad.FilteredGamepad;
 import com.edinarobotics.utils.gamepad.Gamepad;
 import com.edinarobotics.utils.gamepad.gamepadfilters.DeadzoneFilter;

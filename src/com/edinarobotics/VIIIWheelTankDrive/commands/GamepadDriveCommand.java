@@ -1,6 +1,6 @@
-package com.edinarobotics.VIIITankDrive.commands;
+package com.edinarobotics.VIIIWheelTankDrive.commands;
 
-import com.edinarobotics.VIIITankDrive.subsystems.Drivetrain;
+import com.edinarobotics.VIIIWheelTankDrive.subsystems.Drivetrain;
 import com.edinarobotics.VIIIWheelTankDrive.Components;
 import com.edinarobotics.VIIIWheelTankDrive.Controls;
 import com.edinarobotics.utils.gamepad.Gamepad;
