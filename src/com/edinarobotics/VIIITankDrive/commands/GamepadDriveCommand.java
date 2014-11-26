@@ -12,22 +12,19 @@ public class GamepadDriveCommand extends Command{
     private Gamepad gamepad;
     private Drivetrain drivetrain;
 
+    public GamepadDriveCommand(Gamepad gamepad) throws CANTimeoutException {
+        this.gamepad = gamepad;
+        this.drivetrain = Components.getInstance().drivetrain;
+        requires(drivetrain);
+    }
+    
     protected void initialize() {
-        
-        
-        try {
-            drivetrain = Components.getInstance().drivetrain;
-            requires(drivetrain);
-            gamepad = Controls.getInstance().gamepad;
-        } catch (CANTimeoutException ex) {
-            ex.printStackTrace();
-        }
+        double rightValue = gamepad.getRightJoystick().getY();
+        double leftValue = gamepad.getLeftJoystick().getY();
+        drivetrain.setValues(rightValue, leftValue);
     }
 
     protected void execute() {
-        double rightValue = gamepad.getRightJoystick().getY();
-        double leftValue = gamepad.getRightJoystick().getY();
-        drivetrain.setValues(rightValue, leftValue);
     }
 
     protected boolean isFinished() {

@@ -37,8 +37,7 @@ public class VIIIWheelTankDrive extends IterativeRobot {
     
     public void teleopInit() {
         try {
-            Components.getInstance().drivetrain.setDefaultCommand(new GamepadDriveCommand());
-            System.out.println("Point 3");
+            Components.getInstance().drivetrain.setDefaultCommand(new GamepadDriveCommand(Controls.getInstance().gamepad));
         } catch (CANTimeoutException e) {
             System.err.println("CAN Timeout Exception");
         }

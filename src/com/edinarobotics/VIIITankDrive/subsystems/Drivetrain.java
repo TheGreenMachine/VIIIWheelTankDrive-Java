@@ -23,7 +23,6 @@ public class Drivetrain extends Subsystem1816 {
     }
 
     public void update() {
-        System.out.println("Point 5");
         this.robotDrive.tankDrive(leftValue, rightValue);
     }
     
