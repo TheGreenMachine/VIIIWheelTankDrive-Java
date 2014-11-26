@@ -58,7 +58,6 @@ public class Components {
         //End Right Wheels
     //END PID CONSTANTS
     
-    
     private Components() throws CANTimeoutException {
         if(IS_PID_CONTROLLED) {
             right = new SpeedControllerWrapper(RIGHT_CAN_JAG3, RIGHT_CAN_JAG2, RIGHT_CAN_JAG1, 
@@ -73,9 +72,7 @@ public class Components {
         this.drivetrain = new Drivetrain(right, left);
         this.gearshifter = new Gearshifter(GEARSHIFTER_RELAY);
         this.compressor = new Compressor(COMPRESSOR_PRESSURE_SWITCH, COMPRESSOR_RELAY);
-        compressor.start();
-        
-        
+        compressor.start(); 
     }
     
     /**

@@ -6,10 +6,6 @@ import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- * @author GreenMachine
- */
 public class SetSolenoidCommand extends Command {
 
     private Value value;

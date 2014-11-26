@@ -15,20 +15,17 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class VIIIWheelTankDrive extends IterativeRobot {  
     
-    public void robotInit() {
+    public void robotInit() {        
     }
 
-    public void autonomousPeriodic() {
-    
+    public void autonomousPeriodic() {    
     }
-
     
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
     }
     
-    public void testPeriodic() {
-    
+    public void testPeriodic() {    
     }
     
     public void stop() throws CANTimeoutException {
@@ -44,11 +41,9 @@ public class VIIIWheelTankDrive extends IterativeRobot {
         System.out.println("It's alive...");
     }
     
-    public void disabledInit() {
-        
+    public void disabledInit() {        
     }
     
-    public void disabledPeriodic() {
-        
+    public void disabledPeriodic() {        
     }
 }
