@@ -10,9 +10,9 @@ public class Drivetrain extends Subsystem1816 {
     private SpeedControllerWrapper rightSection, leftSection;
     private double rightValue, leftValue;
 
-    public Drivetrain(SpeedControllerWrapper r, SpeedControllerWrapper l) {
-        rightSection = r;
-        leftSection = l;
+    public Drivetrain(SpeedControllerWrapper right, SpeedControllerWrapper left) {
+        rightSection = right;
+        leftSection = left;
         this.robotDrive = new RobotDrive(rightSection, leftSection);
     }
     

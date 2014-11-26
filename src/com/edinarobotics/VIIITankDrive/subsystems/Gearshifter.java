@@ -20,9 +20,7 @@ public class Gearshifter extends Subsystem1816 {
     }
     
     public void update() {
-        
+        gearshifter.set(value);
     }
-    
-    
     
 }

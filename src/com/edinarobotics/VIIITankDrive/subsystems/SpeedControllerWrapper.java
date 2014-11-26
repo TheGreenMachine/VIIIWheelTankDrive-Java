@@ -8,10 +8,29 @@ public class SpeedControllerWrapper implements SpeedController {
     
     private CANJaguar canJag1, canJag2, canJag3;
     
+    private boolean isPIDControlled;
+    
     public SpeedControllerWrapper(int canJag1, int canJag2, int canJag3) throws CANTimeoutException {
         this.canJag1 = new CANJaguar(canJag1);
         this.canJag2 = new CANJaguar(canJag2);
         this.canJag3 = new CANJaguar(canJag3);
+        isPIDControlled = false;
+    }
+    
+    public SpeedControllerWrapper(int canJagEncoder, int canJag2, int canJag3,
+            double p, double i, double d, int encoderTicksPerRev) throws CANTimeoutException {
+        this.canJag1 = new CANJaguar(canJagEncoder, CANJaguar.ControlMode.kSpeed);
+        this.canJag2 = new CANJaguar(canJag2, CANJaguar.ControlMode.kVoltage);
+        this.canJag3 = new CANJaguar(canJag3, CANJaguar.ControlMode.kVoltage);
+        this.canJag1.setPID(p, i, d);
+        this.canJag1.configEncoderCodesPerRev(encoderTicksPerRev);
+        this.canJag1.setSafetyEnabled(false);
+        this.canJag2.setSafetyEnabled(false);
+        this.canJag3.setSafetyEnabled(false);
+        this.canJag1.enableControl();
+        this.canJag2.enableControl();
+        this.canJag3.enableControl();
+        isPIDControlled = true;
     }
 
     public double get() {
@@ -25,9 +44,16 @@ public class SpeedControllerWrapper implements SpeedController {
     
     public void set(double d, byte b) {
         try {
-            canJag1.setX(d, b);
-            canJag2.setX(d, b);
-            canJag3.setX(d, b);
+            if(isPIDControlled) {
+                canJag1.setX(d, b);
+                canJag2.setX(d, b);
+                canJag3.setX(d, b);
+            } else {
+                canJag1.setX(d, b);
+                double voltage = canJag1.getOutputVoltage();
+                canJag2.setX(voltage, b);
+                canJag3.setX(voltage, b);
+            }
         } catch (CANTimeoutException e) {
             System.err.println("CAN Timeout Exception");
         }
@@ -35,9 +61,16 @@ public class SpeedControllerWrapper implements SpeedController {
 
     public void set(double d) {
         try {
-            canJag1.setX(d);
-            canJag2.setX(d);
-            canJag3.setX(d);
+            if(isPIDControlled) {
+                canJag1.setX(d);
+                canJag2.setX(d);
+                canJag3.setX(d);
+            } else {
+                canJag1.setX(d);
+                double voltage = canJag1.getOutputVoltage();
+                canJag2.setX(voltage);
+                canJag3.setX(voltage);
+            }
         } catch (CANTimeoutException e) {
             System.err.println("CAN Timeout Exception");
         }
@@ -54,7 +87,7 @@ public class SpeedControllerWrapper implements SpeedController {
     }
 
     public void pidWrite(double d) {
-        
+        set(d);
     }
     
 }
