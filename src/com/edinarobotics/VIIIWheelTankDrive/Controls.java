@@ -17,10 +17,10 @@ public class Controls {
     
     private Controls() throws CANTimeoutException {        
         Vector gamepadFilters = new Vector();
-        gamepadFilters.addElement(new DeadzoneFilter(0.1));
-        gamepadFilters.addElement(new PowerFilter(2));
+        gamepadFilters.addElement(new DeadzoneFilter(0.05));
+        gamepadFilters.addElement(new PowerFilter(1));
         GamepadFilterSet shootGamepadFilterSet = new GamepadFilterSet(gamepadFilters);
-        gamepad = new FilteredGamepad(3, shootGamepadFilterSet);
+        gamepad = new FilteredGamepad(1, shootGamepadFilterSet);
         
         gamepad.leftBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kForward));
         gamepad.rightBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kReverse));

@@ -20,7 +20,8 @@ public class GamepadDriveCommand extends Command{
     
     protected void initialize() {
         double rightValue = gamepad.getRightJoystick().getY();
-        double leftValue = gamepad.getLeftJoystick().getY();
+        double leftValue = gamepad.getLeftJoystick().getY();        
+        //System.out.println("Right: " + rightValue + ".  Left: " + leftValue);
         drivetrain.setValues(rightValue, leftValue);
     }
 

@@ -13,7 +13,11 @@ public class SpeedControllerWrapper implements SpeedController {
     public SpeedControllerWrapper(int canJag1, int canJag2, int canJag3) throws CANTimeoutException {
         this.canJag1 = new CANJaguar(canJag1);
         this.canJag2 = new CANJaguar(canJag2);
-        this.canJag3 = new CANJaguar(canJag3);
+        this.canJag3 = new CANJaguar(canJag3);        
+        this.canJag1.setSafetyEnabled(false);
+        
+        this.canJag2.setSafetyEnabled(false);
+        this.canJag3.setSafetyEnabled(false);
         this.canJag1.enableControl();
         this.canJag2.enableControl();
         this.canJag3.enableControl();

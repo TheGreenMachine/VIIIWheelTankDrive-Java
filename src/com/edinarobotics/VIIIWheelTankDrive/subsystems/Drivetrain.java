@@ -17,8 +17,8 @@ public class Drivetrain extends Subsystem1816 {
     }
     
     public void setValues(double rightValue, double leftValue) {
-        this.rightValue = rightValue;
-        this.leftValue = leftValue;
+        this.rightValue = -rightValue;
+        this.leftValue = -leftValue;
         update();
     }
 
