@@ -29,7 +29,7 @@ public class GamepadDriveCommand extends Command{
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {        
