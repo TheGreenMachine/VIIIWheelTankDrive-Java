@@ -1,29 +1,36 @@
 package com.edinarobotics.VIIIWheelTankDrive;
 
+import com.edinarobotics.VIIIWheelTankDrive.commands.SetDrivetrainCommand;
 import com.edinarobotics.VIIIWheelTankDrive.commands.SetSolenoidCommand;
+import com.edinarobotics.VIIIWheelTankDrive.gamepad.filters.GamepadFilter;
 import com.edinarobotics.utils.gamepad.FilteredGamepad;
 import com.edinarobotics.utils.gamepad.Gamepad;
 import com.edinarobotics.utils.gamepad.gamepadfilters.DeadzoneFilter;
 import com.edinarobotics.utils.gamepad.gamepadfilters.GamepadFilterSet;
 import com.edinarobotics.utils.gamepad.gamepadfilters.PowerFilter;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import java.util.Vector;
 
 public class Controls {
     private static Controls instance;
+    private double dPadSpeed = 0.75;
     
     public final Gamepad gamepad;
     
     private Controls() throws CANTimeoutException {        
         Vector gamepadFilters = new Vector();
-        gamepadFilters.addElement(new DeadzoneFilter(0.05));
-        gamepadFilters.addElement(new PowerFilter(1));
+        gamepadFilters.addElement(new GamepadFilter());
         GamepadFilterSet shootGamepadFilterSet = new GamepadFilterSet(gamepadFilters);
         gamepad = new FilteredGamepad(1, shootGamepadFilterSet);
         
-        gamepad.leftBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kForward));
-        gamepad.rightBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kReverse));
+        gamepad.leftBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kReverse));
+        gamepad.rightBumper().whenPressed(new SetSolenoidCommand(Relay.Value.kForward));
+        gamepad.dPadUp().whileHeld(new SetDrivetrainCommand(dPadSpeed, dPadSpeed));
+        gamepad.dPadRight().whileHeld(new SetDrivetrainCommand(-dPadSpeed, dPadSpeed));
+        gamepad.dPadLeft().whileHeld(new SetDrivetrainCommand(dPadSpeed, -dPadSpeed));
+        gamepad.dPadDown().whileHeld(new SetDrivetrainCommand(-dPadSpeed, -dPadSpeed));
     }
     
     /**

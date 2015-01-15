@@ -4,10 +4,11 @@ import com.edinarobotics.VIIIWheelTankDrive.subsystems.Drivetrain;
 import com.edinarobotics.VIIIWheelTankDrive.Components;
 import com.edinarobotics.VIIIWheelTankDrive.Controls;
 import com.edinarobotics.utils.gamepad.Gamepad;
+import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GamepadDriveCommand extends Command{
+public class GamepadDriveCommand extends Command {
     
     private Gamepad gamepad;
     private Drivetrain drivetrain;
@@ -19,13 +20,13 @@ public class GamepadDriveCommand extends Command{
     }
     
     protected void initialize() {
-        double rightValue = gamepad.getRightJoystick().getY();
-        double leftValue = gamepad.getLeftJoystick().getY();        
-        //System.out.println("Right: " + rightValue + ".  Left: " + leftValue);
-        drivetrain.setValues(rightValue, leftValue);
     }
 
     protected void execute() {
+        double moveValue = gamepad.getLeftJoystick().getY();
+        double rotateValue = gamepad.getRightJoystick().getX();        
+        drivetrain.setValuesArcade(moveValue, rotateValue);
+        System.out.println("Right: " + moveValue + "         Left: " + rotateValue);
     }
 
     protected boolean isFinished() {

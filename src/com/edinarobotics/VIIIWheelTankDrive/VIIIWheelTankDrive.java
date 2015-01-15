@@ -9,6 +9,8 @@ package com.edinarobotics.VIIIWheelTankDrive;
 
 
 import com.edinarobotics.VIIIWheelTankDrive.commands.GamepadDriveCommand;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStationEnhancedIO;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,7 +24,16 @@ public class VIIIWheelTankDrive extends IterativeRobot {
     }
     
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
+        try {
+            Scheduler.getInstance().run();
+            DriverStation ds = DriverStation.getInstance();
+            double p = ds.getAnalogIn(1);
+            double i = ds.getAnalogIn(2);
+            double d = ds.getAnalogIn(3);
+            Components.getInstance().drivetrain.setPID(p, i, d);
+        } catch (CANTimeoutException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void testPeriodic() {    

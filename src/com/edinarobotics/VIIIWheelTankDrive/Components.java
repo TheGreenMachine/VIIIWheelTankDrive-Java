@@ -1,9 +1,11 @@
+
 package com.edinarobotics.VIIIWheelTankDrive;
 
 import com.edinarobotics.VIIIWheelTankDrive.subsystems.Drivetrain;
 import com.edinarobotics.VIIIWheelTankDrive.subsystems.Gearshifter;
 import com.edinarobotics.VIIIWheelTankDrive.subsystems.SpeedControllerWrapper;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
 
 public class Components {
@@ -12,6 +14,7 @@ public class Components {
     public Drivetrain drivetrain;
     public SpeedControllerWrapper left, right;
     public Gearshifter gearshifter;
+    
     
     //Compressor Switch
     private static final int COMPRESSOR_PRESSURE_SWITCH = 1;
@@ -38,39 +41,55 @@ public class Components {
         private static final int RIGHT_CAN_JAG3 = 16; //This Jaguar has an Encoder equipped
         //End Drivetrain Constants
         
-        //Encoder Ticks per Rev Constant
-        private static final int TICKS_PER_REV = 256;
-        //End Encoder Ticks per Rev Constant
     //End PWM Constants
         
     //PID CONSTANTS
+        
         private static final boolean IS_PID_CONTROLLED = false;
         //Left Wheels
-        private static final double P_LEFT = 0;
+        private static final double P_LEFT = 1;
         private static final double I_LEFT = 0;
         private static final double D_LEFT = 0;
         //End Left Wheels
         
         //Right Wheels
-        private static final double P_RIGHT = 0;
-        private static final double I_RIGHT= 0;
+        private static final double P_RIGHT = 1;
+        private static final double I_RIGHT = 0;
         private static final double D_RIGHT = 0;
         //End Right Wheels
-    //END PID CONSTANTS
+    //End PID CONSTANTS
+        
+    //RPM Constants
+    private static final double HIGH_GEAR_MAX_RPM = 5000.0;
+    private static final double LOW_GEAR_MAX_RPM = 2000.0;
+    //End RPM Constants
+    
+    
+    //Encoder Constants
+        //Encoder Ticks per Rev Constant
+    //1382
+    
+        private static final int TICKS_PER_REV = 256;
+        //End Encoder Ticks per Rev Constant
+        
+        //Distance Per Pulse
+        private static final double DISTANCE_PER_PULSE = 0.00909;
+        //End Distance Per Pulse
+    //End Encoder Constant
     
     private Components() throws CANTimeoutException {
         if(IS_PID_CONTROLLED) {
             right = new SpeedControllerWrapper(RIGHT_CAN_JAG3, RIGHT_CAN_JAG2, RIGHT_CAN_JAG1, 
-                P_RIGHT, I_RIGHT, D_RIGHT, TICKS_PER_REV);
+                P_RIGHT, I_RIGHT, D_RIGHT, TICKS_PER_REV, HIGH_GEAR_MAX_RPM, LOW_GEAR_MAX_RPM);
             left = new SpeedControllerWrapper(LEFT_CAN_JAG1, LEFT_CAN_JAG2, LEFT_CAN_JAG3, 
-                P_LEFT, I_LEFT, D_LEFT, TICKS_PER_REV);
+                P_LEFT, I_LEFT, D_LEFT, TICKS_PER_REV, HIGH_GEAR_MAX_RPM, LOW_GEAR_MAX_RPM);
         } else {
             right = new SpeedControllerWrapper(RIGHT_CAN_JAG1, RIGHT_CAN_JAG2, RIGHT_CAN_JAG3);
             left = new SpeedControllerWrapper(LEFT_CAN_JAG1, LEFT_CAN_JAG2, LEFT_CAN_JAG3);
         }
         
         this.drivetrain = new Drivetrain(right, left);
-        this.gearshifter = new Gearshifter(GEARSHIFTER_RELAY);
+        this.gearshifter = new Gearshifter(GEARSHIFTER_RELAY, drivetrain);
         this.compressor = new Compressor(COMPRESSOR_PRESSURE_SWITCH, COMPRESSOR_RELAY);
         compressor.start(); 
     }
@@ -85,4 +104,5 @@ public class Components {
         }
         return instance;
     }
+
 }
